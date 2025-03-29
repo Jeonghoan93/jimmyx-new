@@ -99,7 +99,7 @@ const { xs } = useDisplay()
           <div class="d-flex justify-center gap-4 flex-wrap">
             <v-btn
               color="blue-lighten-1"
-              size="small"
+              size="large"
               class="text-none text-white px-6 hover:scale-105"
               elevation="0"
               rounded="pill"
@@ -112,7 +112,7 @@ const { xs } = useDisplay()
             <v-btn
               variant="outlined"
               color="blue-lighten-1"
-              size="small"
+              size="large"
               class="text-none px-6 hover:scale-105"
               elevation="0"
               rounded="pill"
@@ -698,7 +698,7 @@ const { xs } = useDisplay()
     <section class="py-8 mb-10">
       <v-card class="bg-dark-3 rounded-xl overflow-hidden" elevation="15">
         <div class="card-header-with-bg">
-          <v-img src="/assets/images/techno.jpg" :height="xs ? 415 : 275" cover>
+          <v-img src="/assets/images/techno.jpg" :height="xs ? 455 : 275" cover>
             <div class="overlay overlay-general">
               <v-container
                 class="d-flex flex-column justify-center align-center text-center h-100"
@@ -714,7 +714,7 @@ const { xs } = useDisplay()
                 <div class="d-flex justify-center gap-4 flex-wrap">
                   <v-btn
                     color="blue-lighten-1"
-                    size="small"
+                    size="large"
                     class="text-none text-white px-6 hover:scale-105"
                     elevation="0"
                     rounded="pill"
@@ -727,7 +727,7 @@ const { xs } = useDisplay()
                   <v-btn
                     variant="outlined"
                     color="blue-lighten-1"
-                    size="small"
+                    size="large"
                     class="text-none px-6 hover:scale-105"
                     elevation="0"
                     rounded="pill"
