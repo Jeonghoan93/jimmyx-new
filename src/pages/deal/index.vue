@@ -35,28 +35,46 @@ const milestones = [
   }
 ]
 
-const fundUsage = [
+const expandedIndex = ref<number | null>(null)
+
+const toggleExpand = (index: number) => {
+  if (expandedIndex.value === index) {
+    // If clicking the currently expanded item, close it
+    expandedIndex.value = null
+  } else {
+    // Otherwise, open the clicked item (and implicitly close any other)
+    expandedIndex.value = index
+  }
+}
+
+const fundUsage = ref([
   {
-    category: 'Development',
-    percentage: 40,
-    description: 'Complete MVP development and launch enhanced features'
+    category: 'Founder Runway',
+    percentage: 35,
+    description:
+      '12+ months of full-time focus to achieve key milestones and Series A readiness, with additional buffer for contingencies'
+  },
+  {
+    category: 'Technical Development',
+    percentage: 35,
+    description: 'AI tools, strategic contractors, and cloud infrastructure'
+  },
+  {
+    category: 'Legal & Admin',
+    percentage: 10,
+    description: 'Company formation, compliance, and user agreements'
   },
   {
     category: 'Marketing',
-    percentage: 30,
-    description: 'User acquisition campaigns and community building'
-  },
-  {
-    category: 'Operations',
-    percentage: 20,
-    description: 'Legal, hosting, and operational costs'
-  },
-  {
-    category: 'Hiring',
     percentage: 10,
-    description: 'Key team members to accelerate growth'
+    description: 'User acquisition and community building in Berlin'
+  },
+  {
+    category: 'Operational Reserve',
+    percentage: 10,
+    description: 'Emergency fund and opportunity budget for unexpected needs'
   }
-]
+])
 
 const { xs } = useDisplay()
 </script>
@@ -554,6 +572,13 @@ const { xs } = useDisplay()
           </h2>
           <v-card class="bg-dark-4 rounded-xl" elevation="10">
             <v-card-text class="pa-6">
+              <p class="text-light-2 mb-6">
+                <strong>Strategy:</strong> Enable founder to work full-time on
+                PartyX while leveraging AI tools and cloud infrastructure to
+                maximize output with minimal overhead - achieving more with less
+                compared to traditional startups carrying heavy personnel costs.
+              </p>
+
               <v-list class="bg-transparent pa-0">
                 <v-list-item
                   v-for="(item, i) in fundUsage"
@@ -567,12 +592,40 @@ const { xs } = useDisplay()
                       {{ item.percentage }}%
                     </div>
                   </template>
-                  <v-list-item-title class="text-light-1 text-h6">{{
-                    item.category
-                  }}</v-list-item-title>
-                  <v-list-item-subtitle class="text-light-2">{{
-                    item.description
-                  }}</v-list-item-subtitle>
+                  <v-list-item-title class="text-light-1 text-h6">
+                    {{ item.category }}
+                  </v-list-item-title>
+
+                  <!-- Use expandedIndex to determine expanded state -->
+                  <div class="mt-1">
+                    <div class="d-flex align-center">
+                      <p class="text-light-2 mb-0" style="line-height: 1.5">
+                        {{
+                          expandedIndex === i
+                            ? item.description
+                            : item.description.length > 20
+                              ? item.description.substring(0, 20) + '...'
+                              : item.description
+                        }}
+                      </p>
+                      <v-btn
+                        v-if="item.description.length > 20"
+                        variant="text"
+                        density="compact"
+                        size="small"
+                        icon
+                        color="blue-lighten-1"
+                        class="ml-2"
+                        @click="toggleExpand(i)"
+                      >
+                        <v-icon>{{
+                          expandedIndex === i
+                            ? 'mdi-chevron-up'
+                            : 'mdi-chevron-down'
+                        }}</v-icon>
+                      </v-btn>
+                    </div>
+                  </div>
                 </v-list-item>
               </v-list>
             </v-card-text>
