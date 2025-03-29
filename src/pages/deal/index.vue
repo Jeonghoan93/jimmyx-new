@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useDisplay } from 'vuetify'
+
 const router = useRouter()
 
 const onClickNavigateToLinkedin = () => {
@@ -65,6 +67,8 @@ const fundUsage = [
     description: 'Key team members to accelerate growth'
   }
 ]
+
+const { xs } = useDisplay()
 </script>
 
 <template>
@@ -122,9 +126,8 @@ const fundUsage = [
             <div class="card-header-with-bg">
               <v-img
                 src="/assets/images/techno.jpg"
-                height="200"
+                :height="xs ? 250 : 200"
                 cover
-                class="card-bg-image"
               >
                 <div class="overlay overlay-general">
                   <v-card-item>
@@ -437,12 +440,7 @@ const fundUsage = [
     <section class="py-8 mb-10">
       <v-card class="bg-dark-3 rounded-xl overflow-hidden" elevation="15">
         <div class="card-header-with-bg">
-          <v-img
-            src="/assets/images/techno.jpg"
-            height="200"
-            cover
-            class="card-bg-image"
-          >
+          <v-img src="/assets/images/techno.jpg" :height="xs ? 375 : 250" cover>
             <div class="overlay overlay-general">
               <v-container
                 class="d-flex flex-column justify-center align-center text-center h-100"
@@ -573,10 +571,6 @@ body {
 /* Card headers with background images */
 .card-header-with-bg {
   position: relative;
-}
-
-.card-bg-image {
-  height: 140px;
 }
 
 .overlay {
