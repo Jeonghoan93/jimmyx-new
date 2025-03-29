@@ -99,21 +99,21 @@ const { xs } = useDisplay()
           <div class="d-flex justify-center gap-4 flex-wrap">
             <v-btn
               color="blue-lighten-1"
-              size="large"
-              class="text-none text-white px-6"
+              size="small"
+              class="text-none text-white px-6 hover:scale-105"
               elevation="0"
               rounded="pill"
               @click="onClickVisitPartyX"
             >
               <v-icon start>mdi-open-in-new</v-icon>
-              Visit Live Platform
+              <span class="font-semibold"> Visit Live Platform</span>
             </v-btn>
 
             <v-btn
               variant="outlined"
               color="blue-lighten-1"
-              size="large"
-              class="text-none px-6"
+              size="small"
+              class="text-none px-6 hover:scale-105"
               elevation="0"
               rounded="pill"
               @click="onClickNavigateToLinkedin"
@@ -698,7 +698,7 @@ const { xs } = useDisplay()
     <section class="py-8 mb-10">
       <v-card class="bg-dark-3 rounded-xl overflow-hidden" elevation="15">
         <div class="card-header-with-bg">
-          <v-img src="/assets/images/techno.jpg" :height="xs ? 375 : 275" cover>
+          <v-img src="/assets/images/techno.jpg" :height="xs ? 415 : 275" cover>
             <div class="overlay overlay-general">
               <v-container
                 class="d-flex flex-column justify-center align-center text-center h-100"
@@ -710,30 +710,31 @@ const { xs } = useDisplay()
                   We're seeking visionary investors who understand the power of
                   authentic human connection in building successful platforms.
                 </p>
-                <div class="d-flex gap-4">
+
+                <div class="d-flex justify-center gap-4 flex-wrap">
                   <v-btn
                     color="blue-lighten-1"
-                    size="large"
-                    class="text-none text-white px-6"
-                    elevation="0"
-                    rounded="pill"
-                    @click="onClickNavigateToLinkedin"
-                  >
-                    <v-icon start>mdi-message-text</v-icon>
-                    Connect for Details
-                  </v-btn>
-
-                  <v-btn
-                    variant="outlined"
-                    color="white"
-                    size="large"
-                    class="text-none px-6"
+                    size="small"
+                    class="text-none text-white px-6 hover:scale-105"
                     elevation="0"
                     rounded="pill"
                     @click="onClickVisitPartyX"
                   >
                     <v-icon start>mdi-open-in-new</v-icon>
-                    Visit Platform
+                    <span class="font-semibold"> Visit Live Platform</span>
+                  </v-btn>
+
+                  <v-btn
+                    variant="outlined"
+                    color="blue-lighten-1"
+                    size="small"
+                    class="text-none px-6 hover:scale-105"
+                    elevation="0"
+                    rounded="pill"
+                    @click="onClickNavigateToLinkedin"
+                  >
+                    <v-icon start>mdi-linkedin</v-icon>
+                    Connect on LinkedIn
                   </v-btn>
                 </div>
               </v-container>
