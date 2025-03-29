@@ -1,16 +1,6 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify'
 
-const router = useRouter()
-
-const onClickNavigateToLinkedin = () => {
-  window.open('https://www.linkedin.com/in/jimmyhwangx/', '_blank')
-}
-
-const onClickVisitPartyX = () => {
-  window.open('https://partyxberlin.com', '_blank')
-}
-
 const milestones = [
   {
     title: 'MVP Completion',
@@ -247,6 +237,221 @@ const { xs } = useDisplay()
       </v-row>
     </section>
 
+    <!-- Market Insights Section for /deal page -->
+    <section class="py-6">
+      <h2 class="text-h4 font-weight-bold mb-6 text-light-1">
+        Market Insights
+      </h2>
+      <v-card class="bg-dark-4 rounded-xl" elevation="10">
+        <v-card-text class="pa-6">
+          <p class="text-light-2 mb-6">
+            With unparalleled experience in the global party scene, we've
+            identified key problems that no existing platform adequately
+            addresses:
+          </p>
+
+          <v-expansion-panels variant="accordion" class="bg-transparent">
+            <!-- Problem 1 -->
+            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
+              <v-expansion-panel-title class="text-light-1">
+                <div class="d-flex align-center">
+                  <v-icon color="blue-lighten-1" class="mr-3"
+                    >mdi-account-star</v-icon
+                  >
+                  <span>Event Organizers as Brands</span>
+                </div>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text class="text-light-2">
+                <p>
+                  DJs and organizers are artists and brands in their own right,
+                  not just service providers. Current platforms treat them as
+                  venues or ticket sellers, missing the influencer-like
+                  relationship they have with their audience.
+                </p>
+                <p class="mt-2">
+                  <strong class="text-blue-lighten-1">Our Solution:</strong>
+                  We're building influencer-style profiles for organizers where
+                  people can follow them directly and receive updates about
+                  upcoming events, building lasting connections beyond single
+                  events.
+                </p>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Problem 2 -->
+            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
+              <v-expansion-panel-title class="text-light-1">
+                <div class="d-flex align-center">
+                  <v-icon color="blue-lighten-1" class="mr-3"
+                    >mdi-spotlight</v-icon
+                  >
+                  <span>Visibility for Smaller Organizers</span>
+                </div>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text class="text-light-2">
+                <p>
+                  Smaller organizers with incredible events get overshadowed by
+                  big commercial events with larger marketing budgets, despite
+                  offering more authentic experiences.
+                </p>
+                <p class="mt-2">
+                  <strong class="text-blue-lighten-1">Our Solution:</strong> Our
+                  discovery algorithm prioritizes quality and fit over size,
+                  helping users find the perfect event for their tastes rather
+                  than just the biggest or most promoted ones.
+                </p>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Problem 3 -->
+            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
+              <v-expansion-panel-title class="text-light-1">
+                <div class="d-flex align-center">
+                  <v-icon color="blue-lighten-1" class="mr-3"
+                    >mdi-filter-variant</v-icon
+                  >
+                  <span>Inadequate Event Filtering</span>
+                </div>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text class="text-light-2">
+                <p>
+                  Current platforms offer basic filtering by date, location, and
+                  general category, but miss critical factors like
+                  <strong
+                    >age demographics, music subgenres, atmosphere, and crowd
+                    vibe.</strong
+                  >
+                </p>
+                <p class="mt-2">
+                  <strong class="text-blue-lighten-1">Our Solution:</strong>
+                  We've developed nuanced filtering with crowd demographics,
+                  atmosphere ratings, and vibe indicators to match attendees
+                  with their perfect party experience.
+                </p>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Problem 4 -->
+            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
+              <v-expansion-panel-title class="text-light-1">
+                <div class="d-flex align-center">
+                  <v-icon color="blue-lighten-1" class="mr-3"
+                    >mdi-camera</v-icon
+                  >
+                  <span>Limited Event Atmosphere Visibility</span>
+                </div>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text class="text-light-2">
+                <p>
+                  Static descriptions and promotional photos don't capture the
+                  real atmosphere, leading to mismatched expectations and
+                  disappointment.
+                </p>
+                <p class="mt-2">
+                  <strong class="text-blue-lighten-1">Our Solution:</strong> Our
+                  platform enables live atmosphere sharing with user-generated
+                  content, live clips, and real-time updates to give authentic
+                  previews of what events are actually like.
+                </p>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Problem 5 -->
+            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
+              <v-expansion-panel-title class="text-light-1">
+                <div class="d-flex align-center">
+                  <v-icon color="blue-lighten-1" class="mr-3"
+                    >mdi-ticket-account</v-icon
+                  >
+                  <span>Beyond Just Ticket Sales</span>
+                </div>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text class="text-light-2">
+                <p>
+                  Many events aren't just about selling tickets - they require
+                  invitation requests, guest list approval, or other custom
+                  access methods that current platforms don't support.
+                </p>
+                <p class="mt-2">
+                  <strong class="text-blue-lighten-1">Our Solution:</strong> We
+                  offer flexible access options including invitation requests,
+                  VIP lists, and custom approval flows, recognizing that
+                  exclusivity varies widely among event types.
+                </p>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Problem 6 -->
+            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
+              <v-expansion-panel-title class="text-light-1">
+                <div class="d-flex align-center">
+                  <v-icon color="blue-lighten-1" class="mr-3">mdi-tools</v-icon>
+                  <span>Comprehensive Management Tools</span>
+                </div>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text class="text-light-2">
+                <p>
+                  Event organizers struggle with fragmented tools for different
+                  aspects of event management (staff, venues, timelines, guest
+                  lists).
+                </p>
+                <p class="mt-2">
+                  <strong class="text-blue-lighten-1">Our Solution:</strong> Our
+                  event management platform includes staff coordination, venue
+                  timelines, and dynamic planning tools tailored to specific
+                  event types (festivals, club nights, pub crawls, etc.).
+                </p>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+
+            <!-- Problem 7 -->
+            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
+              <v-expansion-panel-title class="text-light-1">
+                <div class="d-flex align-center">
+                  <v-icon color="blue-lighten-1" class="mr-3"
+                    >mdi-palette-swatch</v-icon
+                  >
+                  <span>Event-Type Adaptive UX</span>
+                </div>
+              </v-expansion-panel-title>
+              <v-expansion-panel-text class="text-light-2">
+                <p>
+                  Different event types (festivals, pub crawls, club nights,
+                  private parties) have radically different management needs,
+                  but current platforms offer one-size-fits-all interfaces.
+                </p>
+                <p class="mt-2">
+                  <strong class="text-blue-lighten-1">Our Solution:</strong>
+                  We've developed adaptive UX that changes based on event type,
+                  showing only relevant features and tailoring the experience to
+                  make organizers more productive and successful.
+                </p>
+              </v-expansion-panel-text>
+            </v-expansion-panel>
+          </v-expansion-panels>
+
+          <div class="mt-8 pa-6 bg-dark-5 rounded-lg">
+            <h3 class="text-h5 font-weight-bold text-light-1 mb-4">
+              Our Competitive Edge
+            </h3>
+            <p class="text-light-2">
+              While competitors focus on mass-market ticketing, we're building a
+              platform that truly understands the nuanced ecosystem of events
+              and celebrations. By addressing these specific pain points that no
+              other platform solves, we're creating not just a marketplace but
+              an ecosystem that helps organizers succeed and attendees find
+              their perfect experience.
+            </p>
+            <p class="text-light-2 mt-4">
+              This deep understanding comes from unparalleled personal
+              experience in the global party scene, giving us insights that
+              technology-first competitors simply don't have.
+            </p>
+          </div>
+        </v-card-text>
+      </v-card>
+    </section>
+
     <!-- Competitive Advantage -->
     <section class="py-6">
       <h2 class="text-h4 font-weight-bold mb-6 text-light-1">
@@ -440,7 +645,7 @@ const { xs } = useDisplay()
     <section class="py-8 mb-10">
       <v-card class="bg-dark-3 rounded-xl overflow-hidden" elevation="15">
         <div class="card-header-with-bg">
-          <v-img src="/assets/images/techno.jpg" :height="xs ? 375 : 250" cover>
+          <v-img src="/assets/images/techno.jpg" :height="xs ? 375 : 275" cover>
             <div class="overlay overlay-general">
               <v-container
                 class="d-flex flex-column justify-center align-center text-center h-100"
