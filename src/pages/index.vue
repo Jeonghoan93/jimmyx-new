@@ -1,37 +1,7 @@
-<script setup lang="ts">
-const router = useRouter()
-
-const onClickNavigateToLinkedin = () => {
-  window.open('https://www.linkedin.com/in/jimmyhwangx/', '_blank')
-}
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <header class="w-full border-b bg-gray-6 shadow h-[57px] fixed z-50">
-    <v-container>
-      <div class="flex items-center justify-between">
-        <div class="w-36">
-          <span
-            class="text-[#f7f7f7] cursor-pointer font-extrabold text-[14pt]"
-            @click="() => router.push('/')"
-          >
-            JimmyX
-          </span>
-        </div>
-
-        <div class="flex w-32 justify-end gap-5 items-center">
-          <v-btn
-            @click="onClickNavigateToLinkedin"
-            size="small"
-            color="gold"
-            class="text-dark-6"
-          >
-            <span class="text-xs font-semibold"> Connect </span>
-          </v-btn>
-        </div>
-      </div>
-    </v-container>
-  </header>
+  <Navbar />
 
   <v-container class="bg-gray-6 mt-[60px] flex flex-col gap-6">
     <!-- Hero Section -->
@@ -45,6 +15,15 @@ const onClickNavigateToLinkedin = () => {
             Free people from labor and help individuals discover their fullest
             potential
           </p>
+          <v-btn class="hover:scale-105 text-none">
+            <template #append>
+              <v-icon class="hover:scale-105"> mdi-rocket-launch</v-icon>
+            </template>
+
+            <span @click="() => $router.push('/deal')" class="font-semibold">
+              Investment Opportunity
+            </span>
+          </v-btn>
         </v-col>
       </v-row>
     </section>
