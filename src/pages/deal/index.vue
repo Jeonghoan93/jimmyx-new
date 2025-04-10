@@ -6,73 +6,82 @@ const milestones = [
     title: 'MVP Completion',
     timeframe: 'Month 1-2',
     description:
-      'Finalize the MVP with full feature set and conduct thorough user testing'
+      'Finalize the MVP with a scalable, modular backend (NestJS) and set up initial infra stack (Redis, Kafka, GCP)'
+  },
+  {
+    title: 'Tech Hiring & Launch Prep',
+    timeframe: 'Month 2-3',
+    description:
+      'Hire infrastructure-focused backend engineer and prepare public beta launch in Berlin'
   },
   {
     title: 'Market Launch',
     timeframe: 'Month 3',
-    description: 'Full public launch with marketing campaign in Berlin'
+    description:
+      'Launch platform publicly with hyper-targeted organizer acquisition and local campaign'
   },
   {
     title: 'User Acquisition',
     timeframe: 'Month 3-6',
-    description: 'Reach 5,000 active users and 200 event hosts'
+    description:
+      'Reach 5,000+ users and 200 event hosts via community growth, partnerships, and real-world loops'
+  },
+  {
+    title: 'Infrastructure Modularization',
+    timeframe: 'Month 6-8',
+    description:
+      'Split monolithic backend into auth/payment microservices and refine observability tooling'
   },
   {
     title: 'Revenue Generation',
-    timeframe: 'Month 4-8',
-    description: 'Achieve €10,000 monthly recurring revenue'
-  },
-  {
-    title: 'Expansion',
-    timeframe: 'Month 8-12',
-    description: 'Expand to 2 additional European cities'
+    timeframe: 'Month 6-9',
+    description:
+      'Enable zero-commission model with premium features for organizers; pilot affiliate integrations'
   },
   {
     title: 'Series A Preparation',
     timeframe: 'Month 10-12',
-    description: 'Prepare metrics and growth data for Series A fundraising'
+    description:
+      'Package metrics and prepare data room for Series A fundraising'
   }
 ]
 
 const expandedIndex = ref<number | null>(null)
 
 const toggleExpand = (index: number) => {
-  if (expandedIndex.value === index) {
-    // If clicking the currently expanded item, close it
-    expandedIndex.value = null
-  } else {
-    // Otherwise, open the clicked item (and implicitly close any other)
-    expandedIndex.value = index
-  }
+  expandedIndex.value = expandedIndex.value === index ? null : index
 }
 
 const fundUsage = ref([
   {
-    category: 'Founder Runway',
-    percentage: 35,
+    category: 'Strategic Infrastructure Hiring',
+    percentage: 60,
     description:
-      '12+ months of full-time focus to achieve key milestones and Series A readiness, with additional buffer for contingencies'
+      'Hire one senior backend/infrastructure engineer to scale MVP and transition to modular microservices architecture'
   },
   {
-    category: 'Technical Development',
-    percentage: 35,
-    description: 'AI tools, strategic contractors, and cloud infrastructure'
+    category: 'Founder Runway & Workspace',
+    percentage: 25,
+    description:
+      'Enable full-time focus and Berlin-based WeWork space for founder to lead product, frontend, and investor ops'
+  },
+  {
+    category: 'Cloud Services & Tooling',
+    percentage: 7,
+    description:
+      'GCP stack including Cloud Run, Firebase, Redis, Kafka, and observability tools to ensure system readiness'
   },
   {
     category: 'Legal & Admin',
-    percentage: 10,
-    description: 'Company formation, compliance, and user agreements'
+    percentage: 5,
+    description:
+      'Company formation, user policy setup, early contracts and compliance'
   },
   {
-    category: 'Marketing',
-    percentage: 10,
-    description: 'User acquisition and community building in Berlin'
-  },
-  {
-    category: 'Operational Reserve',
-    percentage: 10,
-    description: 'Emergency fund and opportunity budget for unexpected needs'
+    category: 'Marketing & Field Ops',
+    percentage: 3,
+    description:
+      'Real-world acquisition via community organizers, promoters, and hostel/event partnerships'
   }
 ])
 
@@ -183,7 +192,7 @@ const { xs } = useDisplay()
               <v-row>
                 <v-col cols="12" md="4" class="text-center">
                   <h3 class="text-h5 font-weight-bold text-blue-lighten-1 mb-2">
-                    €300,000
+                    €500,000
                   </h3>
                   <p class="text-light-2">Pre-seed investment for 10% equity</p>
                 </v-col>
@@ -195,7 +204,7 @@ const { xs } = useDisplay()
                 </v-col>
                 <v-col cols="12" md="4" class="text-center">
                   <h3 class="text-h5 font-weight-bold text-blue-lighten-1 mb-2">
-                    €8.5B
+                    Unknown
                   </h3>
                   <p class="text-light-2">Addressable market in Europe</p>
                 </v-col>

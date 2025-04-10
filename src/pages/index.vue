@@ -1,4 +1,6 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+const showPartyXVisionDialog = ref(false)
+</script>
 
 <template>
   <Navbar />
@@ -156,13 +158,27 @@
             </div>
 
             <v-card-text class="pa-6">
-              <p class="text-light-1 font-weight-bold mb-2">Goal:</p>
-              <p class="text-light-2 mb-4">
-                To create sanctuaries of authentic human connection where people
-                rediscover joy, freedom, and collective power through
-                celebration—reminding us that true community transcends the
-                divisions imposed upon us.
+              <p class="text-light-1 font-weight-bold mb-2">Our Vision:</p>
+
+              <p class="text-light-2 mb-3">
+                AI's inevitable rise demands a human counterforce. PartyX
+                champions authentic connection as essential infrastructure for
+                our evolving future.
+                <strong class="text-light-1"
+                  >Invest in more than a platform – invest in the
+                  movement.</strong
+                >
               </p>
+              <v-btn
+                variant="text"
+                color="blue-accent"
+                @click="showPartyXVisionDialog = true"
+                class="text-none px-0 mb-4"
+                size="small"
+              >
+                Read the Full Vision...
+                <v-icon end size="small">mdi-arrow-right</v-icon>
+              </v-btn>
 
               <p class="text-light-1 font-weight-bold mb-2">Products:</p>
               <ul class="text-light-2 mb-6">
@@ -227,11 +243,16 @@
           </p>
 
           <p class="text-light-2 text-body-1 mb-4">
-            My background combines technical expertise with entrepreneurial
-            vision, focusing on how AI can enhance human capabilities rather
-            than replace them. I believe that by creating the right tools, we
-            can accelerate humanity's development and expand our horizons beyond
-            Earth.
+            My mission as a founder is simple but bold: before I die, to help
+            each individual on this planet uncover their fullest potential. I
+            believe technology, especially AI, should liberate us—not replace
+            us—and act as a launchpad toward richer, more meaningful lives.
+            PartyX is just the beginning: a cultural movement disguised as a
+            platform. Once scaled, it will pave the way for ArtX and AgentX —
+            creative and productivity infrastructures designed to empower
+            expression and automate labor. Together, these ventures aim to make
+            freedom, creativity, and human connection not the exception, but the
+            norm — accelerating humanity’s path toward a galactic future.
           </p>
 
           <div class="d-flex flex-wrap gap-2 mb-6">
@@ -278,6 +299,66 @@
       </v-row>
     </section>
   </v-container>
+
+  <v-dialog v-model="showPartyXVisionDialog" max-width="750px" scrollable>
+    <v-card class="bg-dark-5">
+      <v-card-title
+        class="text-h5 text-light-1 font-weight-bold pa-4 d-flex justify-space-between align-center"
+      >
+        <span>Why PartyX Matters Now</span>
+        <v-btn
+          icon="mdi-close"
+          variant="text"
+          @click="showPartyXVisionDialog = false"
+          size="small"
+        ></v-btn>
+      </v-card-title>
+      <v-divider></v-divider>
+
+      <v-card-text
+        class="text-light-2 pa-5 text-body-1"
+        style="line-height: 1.7"
+      >
+        <p class="mb-5">
+          We perceive AI less as a standalone disruption and more as an integral
+          element emerging within humanity's ongoing evolution – a necessary
+          phase, perhaps even destiny, in how our shared reality continues to
+          unfold. It feels less like something that *happened*, and more like
+          something that *had* to happen.
+        </p>
+        <p class="mb-5">
+          As this inevitable process reshapes familiar structures, potentially
+          freeing up significant human time perhaps facilitated by concepts like
+          general income, we anticipate not just societal adjustments, but a
+          profound inner shift. There will be an amplified yearning for
+          <strong>meaningful experiences</strong>, authentic
+          <strong>self-expression</strong>, and deeper
+          <strong>human connection</strong> – needs that resonate beyond
+          everyday language but are intuitively felt.
+        </p>
+        <p class="mb-5">
+          PartyX is conceived precisely for this emerging inner landscape. It
+          stands as a vital <strong>counterforce</strong>, dedicated to
+          nurturing genuine human interaction, shared celebration, and the
+          <strong>rebellious spirit of authentic community</strong> within an
+          increasingly complex world. It’s designed to strengthen the essential
+          social bonds that anchor us and enrich the human experience as we
+          navigate this next stage together.
+        </p>
+        <p>
+          We appreciate that different partners operate on different timelines,
+          fully recognizing that exits following early rounds are a natural
+          aspect of venture investment. For PartyX itself, the vision is fixed
+          on a longer trajectory: Our unwavering objective is
+          <strong
+            >to become the number one corporation in Europe by market
+            capitalization within three years.</strong
+          >
+          This is the outcome we are dedicated to building
+        </p>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
 <style>
