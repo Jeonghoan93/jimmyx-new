@@ -1,50 +1,12 @@
 <script setup lang="ts">
 import { useDisplay } from 'vuetify'
 
-const milestones = [
-  {
-    title: 'MVP Completion',
-    timeframe: 'Month 1-2',
-    description:
-      'Finalize the MVP with a scalable, modular backend (NestJS) and set up initial infra stack (Redis, Kafka, GCP)'
-  },
-  {
-    title: 'Tech Hiring & Launch Prep',
-    timeframe: 'Month 2-3',
-    description:
-      'Hire infrastructure-focused backend engineer and prepare public beta launch in Berlin'
-  },
-  {
-    title: 'Market Launch',
-    timeframe: 'Month 3',
-    description:
-      'Launch platform publicly with hyper-targeted organizer acquisition and local campaign'
-  },
-  {
-    title: 'User Acquisition',
-    timeframe: 'Month 3-6',
-    description:
-      'Reach 5,000+ users and 200 event hosts via community growth, partnerships, and real-world loops'
-  },
-  {
-    title: 'Infrastructure Modularization',
-    timeframe: 'Month 6-8',
-    description:
-      'Split monolithic backend into auth/payment microservices and refine observability tooling'
-  },
-  {
-    title: 'Revenue Generation',
-    timeframe: 'Month 6-9',
-    description:
-      'Enable zero-commission model with premium features for organizers; pilot affiliate integrations'
-  },
-  {
-    title: 'Series A Preparation',
-    timeframe: 'Month 10-12',
-    description:
-      'Package metrics and prepare data room for Series A fundraising'
-  }
-]
+import {
+  fundUsage,
+  focusIcons,
+  roadmapFocus,
+  marketInsights
+} from './constants'
 
 const expandedIndex = ref<number | null>(null)
 
@@ -52,40 +14,21 @@ const toggleExpand = (index: number) => {
   expandedIndex.value = expandedIndex.value === index ? null : index
 }
 
-const fundUsage = ref([
-  {
-    category: 'Strategic Infrastructure Hiring',
-    percentage: 60,
-    description:
-      'Hire one senior backend/infrastructure engineer to scale MVP and transition to modular microservices architecture'
-  },
-  {
-    category: 'Founder Runway & Workspace',
-    percentage: 25,
-    description:
-      'Enable full-time focus and Berlin-based WeWork space for founder to lead product, frontend, and investor ops'
-  },
-  {
-    category: 'Cloud Services & Tooling',
-    percentage: 7,
-    description:
-      'GCP stack including Cloud Run, Firebase, Redis, Kafka, and observability tools to ensure system readiness'
-  },
-  {
-    category: 'Legal & Admin',
-    percentage: 5,
-    description:
-      'Company formation, user policy setup, early contracts and compliance'
-  },
-  {
-    category: 'Marketing & Field Ops',
-    percentage: 3,
-    description:
-      'Real-world acquisition via community organizers, promoters, and hostel/event partnerships'
+const getShortDescription = (description: string, maxLength = 50): string => {
+  if (description.length <= maxLength) {
+    return description
   }
-])
+  // Find the last space within the maxLength to avoid cutting words
+  const lastSpaceIndex = description.lastIndexOf(' ', maxLength)
+  return (
+    description.substring(0, lastSpaceIndex > 0 ? lastSpaceIndex : maxLength) +
+    '...'
+  )
+}
 
 const { xs } = useDisplay()
+
+const showPartyXVisionDialog = ref(false)
 </script>
 
 <template>
@@ -100,9 +43,9 @@ const { xs } = useDisplay()
             PartyX Investment Opportunity
           </h1>
           <p class="text-light-2 text-body-1 mb-8 max-w-2xl mx-auto">
-            Join us in creating the platform that revolutionizes how people
-            connect through authentic celebrations—an €8.5B market opportunity
-            with strong early traction.
+            Fuel the movement defining the future of authentic connection.
+            PartyX empowers creators and unites communities through
+            unforgettable shared experiences.
           </p>
 
           <div class="d-flex justify-center gap-4 flex-wrap">
@@ -204,9 +147,17 @@ const { xs } = useDisplay()
                 </v-col>
                 <v-col cols="12" md="4" class="text-center">
                   <h3 class="text-h5 font-weight-bold text-blue-lighten-1 mb-2">
-                    Unknown
+                    80B+
+                    <v-icon
+                      @click="showPartyXVisionDialog = true"
+                      size="x-small"
+                      color="grey-lighten-1"
+                      class="ml-1 pb-1"
+                      >mdi-information-outline</v-icon
+                    >
                   </h3>
-                  <p class="text-light-2">Addressable market in Europe</p>
+
+                  <p class="text-light-2">Annual revenue potential</p>
                 </v-col>
               </v-row>
             </v-card-text>
@@ -228,14 +179,15 @@ const { xs } = useDisplay()
                 The Problem
               </h3>
               <p class="text-light-2 mb-4">
-                Event organizers struggle to find venues and build audiences,
-                while people seeking unique experiences have difficulty
-                discovering authentic celebrations that match their interests.
+                PartyX creates a marketplace connecting event organizers with
+                attendees seeking authentic celebration experiences. We enable
+                organizers to list events, manage registrations, and build
+                communities around their unique offerings.
               </p>
               <p class="text-light-2">
-                This disconnect creates significant friction in a market worth
-                €8.5B in Europe alone, with post-pandemic demand for in-person
-                experiences surging by 37%.
+                For attendees, we provide discovery tools to find experiences
+                that resonate with their interests, fostering deeper community
+                connections.
               </p>
             </v-card-text>
           </v-card>
@@ -277,181 +229,25 @@ const { xs } = useDisplay()
             addresses:
           </p>
 
-          <v-expansion-panels variant="accordion" class="bg-transparent">
-            <!-- Problem 1 -->
-            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
+          <v-expansion-panels variant="inset" class="my-3">
+            <v-expansion-panel
+              class="bg-dark-5 mb-3 rounded-lg"
+              v-for="(insight, i) in marketInsights"
+              :key="i"
+            >
               <v-expansion-panel-title class="text-light-1">
                 <div class="d-flex align-center">
-                  <v-icon color="blue-lighten-1" class="mr-3"
-                    >mdi-account-star</v-icon
-                  >
-                  <span>Event Organizers as Brands</span>
+                  <v-icon color="blue-lighten-1" class="mr-3">{{
+                    insight.icon
+                  }}</v-icon>
+                  <span>{{ insight.title }}</span>
                 </div>
               </v-expansion-panel-title>
               <v-expansion-panel-text class="text-light-2">
-                <p>
-                  DJs and organizers are artists and brands in their own right,
-                  not just service providers. Current platforms treat them as
-                  venues or ticket sellers, missing the influencer-like
-                  relationship they have with their audience.
-                </p>
+                <p>{{ insight.problem }}</p>
                 <p class="mt-2">
                   <strong class="text-blue-lighten-1">Our Solution:</strong>
-                  We're building influencer-style profiles for organizers where
-                  people can follow them directly and receive updates about
-                  upcoming events, building lasting connections beyond single
-                  events.
-                </p>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-
-            <!-- Problem 2 -->
-            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
-              <v-expansion-panel-title class="text-light-1">
-                <div class="d-flex align-center">
-                  <v-icon color="blue-lighten-1" class="mr-3"
-                    >mdi-spotlight</v-icon
-                  >
-                  <span>Visibility for Smaller Organizers</span>
-                </div>
-              </v-expansion-panel-title>
-              <v-expansion-panel-text class="text-light-2">
-                <p>
-                  Smaller organizers with incredible events get overshadowed by
-                  big commercial events with larger marketing budgets, despite
-                  offering more authentic experiences.
-                </p>
-                <p class="mt-2">
-                  <strong class="text-blue-lighten-1">Our Solution:</strong> Our
-                  discovery algorithm prioritizes quality and fit over size,
-                  helping users find the perfect event for their tastes rather
-                  than just the biggest or most promoted ones.
-                </p>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-
-            <!-- Problem 3 -->
-            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
-              <v-expansion-panel-title class="text-light-1">
-                <div class="d-flex align-center">
-                  <v-icon color="blue-lighten-1" class="mr-3"
-                    >mdi-filter-variant</v-icon
-                  >
-                  <span>Inadequate Event Filtering</span>
-                </div>
-              </v-expansion-panel-title>
-              <v-expansion-panel-text class="text-light-2">
-                <p>
-                  Current platforms offer basic filtering by date, location, and
-                  general category, but miss critical factors like
-                  <strong
-                    >age demographics, music subgenres, atmosphere, and crowd
-                    vibe.</strong
-                  >
-                </p>
-                <p class="mt-2">
-                  <strong class="text-blue-lighten-1">Our Solution:</strong>
-                  We've developed nuanced filtering with crowd demographics,
-                  atmosphere ratings, and vibe indicators to match attendees
-                  with their perfect party experience.
-                </p>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-
-            <!-- Problem 4 -->
-            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
-              <v-expansion-panel-title class="text-light-1">
-                <div class="d-flex align-center">
-                  <v-icon color="blue-lighten-1" class="mr-3"
-                    >mdi-camera</v-icon
-                  >
-                  <span>Limited Event Atmosphere Visibility</span>
-                </div>
-              </v-expansion-panel-title>
-              <v-expansion-panel-text class="text-light-2">
-                <p>
-                  Static descriptions and promotional photos don't capture the
-                  real atmosphere, leading to mismatched expectations and
-                  disappointment.
-                </p>
-                <p class="mt-2">
-                  <strong class="text-blue-lighten-1">Our Solution:</strong> Our
-                  platform enables live atmosphere sharing with user-generated
-                  content, live clips, and real-time updates to give authentic
-                  previews of what events are actually like.
-                </p>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-
-            <!-- Problem 5 -->
-            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
-              <v-expansion-panel-title class="text-light-1">
-                <div class="d-flex align-center">
-                  <v-icon color="blue-lighten-1" class="mr-3"
-                    >mdi-ticket-account</v-icon
-                  >
-                  <span>Beyond Just Ticket Sales</span>
-                </div>
-              </v-expansion-panel-title>
-              <v-expansion-panel-text class="text-light-2">
-                <p>
-                  Many events aren't just about selling tickets - they require
-                  invitation requests, guest list approval, or other custom
-                  access methods that current platforms don't support.
-                </p>
-                <p class="mt-2">
-                  <strong class="text-blue-lighten-1">Our Solution:</strong> We
-                  offer flexible access options including invitation requests,
-                  VIP lists, and custom approval flows, recognizing that
-                  exclusivity varies widely among event types.
-                </p>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-
-            <!-- Problem 6 -->
-            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
-              <v-expansion-panel-title class="text-light-1">
-                <div class="d-flex align-center">
-                  <v-icon color="blue-lighten-1" class="mr-3">mdi-tools</v-icon>
-                  <span>Comprehensive Management Tools</span>
-                </div>
-              </v-expansion-panel-title>
-              <v-expansion-panel-text class="text-light-2">
-                <p>
-                  Event organizers struggle with fragmented tools for different
-                  aspects of event management (staff, venues, timelines, guest
-                  lists).
-                </p>
-                <p class="mt-2">
-                  <strong class="text-blue-lighten-1">Our Solution:</strong> Our
-                  event management platform includes staff coordination, venue
-                  timelines, and dynamic planning tools tailored to specific
-                  event types (festivals, club nights, pub crawls, etc.).
-                </p>
-              </v-expansion-panel-text>
-            </v-expansion-panel>
-
-            <!-- Problem 7 -->
-            <v-expansion-panel class="bg-dark-5 mb-3 rounded-lg">
-              <v-expansion-panel-title class="text-light-1">
-                <div class="d-flex align-center">
-                  <v-icon color="blue-lighten-1" class="mr-3"
-                    >mdi-palette-swatch</v-icon
-                  >
-                  <span>Event-Type Adaptive UX</span>
-                </div>
-              </v-expansion-panel-title>
-              <v-expansion-panel-text class="text-light-2">
-                <p>
-                  Different event types (festivals, pub crawls, club nights,
-                  private parties) have radically different management needs,
-                  but current platforms offer one-size-fits-all interfaces.
-                </p>
-                <p class="mt-2">
-                  <strong class="text-blue-lighten-1">Our Solution:</strong>
-                  We've developed adaptive UX that changes based on event type,
-                  showing only relevant features and tailoring the experience to
-                  make organizers more productive and successful.
+                  {{ insight.solution }}
                 </p>
               </v-expansion-panel-text>
             </v-expansion-panel>
@@ -547,27 +343,66 @@ const { xs } = useDisplay()
       <v-row>
         <v-col cols="12" md="7">
           <h2 class="text-h4 font-weight-bold mb-6 text-light-1">
-            12-Month Roadmap
+            Use of Time
           </h2>
           <v-card class="bg-dark-4 rounded-xl" elevation="10">
             <v-card-text class="pa-6">
-              <v-timeline align="start" class="py-4">
+              <p class="text-light-2 mb-6 text-[14px]">
+                synchronously. Key initiatives like product scaling, team
+                growth, user acquisition, and Series A prep run in parallel from
+                Day 1. This roadmap highlights the shifting
+                <strong class="text-blue-lighten-1">proportional focus</strong>
+                across core streams over the next 12 months. Series A readiness
+                is built progressively.
+              </p>
+              <v-timeline
+                align="start"
+                density="compact"
+                line-inset="8"
+                truncate-line="both"
+              >
                 <v-timeline-item
-                  v-for="(milestone, i) in milestones"
+                  v-for="(item, i) in roadmapFocus"
                   :key="i"
-                  :dot-color="'blue-lighten-1'"
+                  dot-color="blue-lighten-1"
                   size="small"
+                  fill-dot
                 >
-                  <template v-slot:opposite>
-                    <span class="text-caption text-grey-lighten-2">{{
-                      milestone.timeframe
-                    }}</span>
-                  </template>
                   <div>
-                    <h3 class="text-h6 font-weight-bold text-light-1">
-                      {{ milestone.title }}
+                    <h3 class="text-h6 font-weight-bold text-light-1 mb-1">
+                      {{ item.phase }}
                     </h3>
-                    <p class="text-light-2">{{ milestone.description }}</p>
+                    <p
+                      class="text-body-2 text-light-2 mb-3"
+                      style="white-space: normal"
+                    >
+                      {{ item.description }}
+                    </p>
+                    <div class="mb-2">
+                      <div class="d-flex flex-column" style="gap: 4px">
+                        <div
+                          v-for="focus in item.focusAreas"
+                          :key="focus.area"
+                          class="d-flex align-center"
+                        >
+                          <v-icon
+                            size="sm"
+                            :icon="
+                              focusIcons[focus.area] || 'mdi-circle-medium'
+                            "
+                            class="mr-2"
+                            color="grey-lighten-1"
+                          ></v-icon>
+                          <span class="text-body-2 text-light-1">
+                            {{ focus.area }}:
+                            <span
+                              class="font-weight-bold text-blue-lighten-2"
+                              >{{ focus.effort }}</span
+                            >
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </v-timeline-item>
               </v-timeline>
@@ -581,59 +416,58 @@ const { xs } = useDisplay()
           </h2>
           <v-card class="bg-dark-4 rounded-xl" elevation="10">
             <v-card-text class="pa-6">
-              <p class="text-light-2 mb-6">
-                <strong>Strategy:</strong> Enable founder to work full-time on
-                PartyX while leveraging AI tools and cloud infrastructure to
-                maximize output with minimal overhead - achieving more with less
-                compared to traditional startups carrying heavy personnel costs.
+              <p class="text-light-2 mb-6 text-body-2">
+                <strong>Strategy:</strong> Enable founder full-time focus, hire
+                strategic infra engineer, leverage AI/cloud for lean ops & max
+                output pre-Series A.
               </p>
-
               <v-list class="bg-transparent pa-0">
                 <v-list-item
                   v-for="(item, i) in fundUsage"
                   :key="i"
-                  class="px-0 py-4"
+                  class="px-0 py-3"
                 >
                   <template v-slot:prepend>
                     <div
-                      class="text-h6 font-weight-bold text-blue-lighten-1 w-16 text-center"
+                      class="text-h6 font-weight-bold text-blue-lighten-1 w-16 text-center mr-2"
                     >
                       {{ item.percentage }}%
                     </div>
                   </template>
-                  <v-list-item-title class="text-light-1 text-h6">
+                  <v-list-item-title
+                    class="text-light-1 text-subtitle-1 font-weight-bold mb-1"
+                  >
                     {{ item.category }}
                   </v-list-item-title>
 
-                  <!-- Use expandedIndex to determine expanded state -->
-                  <div class="mt-1">
-                    <div class="d-flex align-center">
-                      <p class="text-light-2 mb-0" style="line-height: 1.5">
-                        {{
-                          expandedIndex === i
-                            ? item.description
-                            : item.description.length > 20
-                              ? item.description.substring(0, 20) + '...'
-                              : item.description
-                        }}
-                      </p>
-                      <v-btn
-                        v-if="item.description.length > 20"
-                        variant="text"
-                        density="compact"
-                        size="small"
-                        icon
-                        color="blue-lighten-1"
-                        class="ml-2"
-                        @click="toggleExpand(i)"
-                      >
-                        <v-icon>{{
-                          expandedIndex === i
-                            ? 'mdi-chevron-up'
-                            : 'mdi-chevron-down'
-                        }}</v-icon>
-                      </v-btn>
-                    </div>
+                  <div class="d-flex align-start w-100">
+                    <p
+                      class="text-light-2 mb-0 text-body-2 flex-grow-1"
+                      style="line-height: 1.5"
+                    >
+                      {{
+                        expandedIndex === i
+                          ? item.description
+                          : getShortDescription(item.description, xs ? 40 : 60)
+                      }}
+                    </p>
+                    <v-btn
+                      v-if="item.description.length > (xs ? 40 : 60)"
+                      variant="text"
+                      density="compact"
+                      size="small"
+                      icon
+                      color="blue-lighten-1"
+                      class="ml-1 flex-shrink-0 align-self-center"
+                      @click="toggleExpand(i)"
+                    >
+                      <v-icon size="small">{{
+                        /* Chevron logic */
+                        expandedIndex === i
+                          ? 'mdi-chevron-up'
+                          : 'mdi-chevron-down'
+                      }}</v-icon>
+                    </v-btn>
                   </div>
                 </v-list-item>
               </v-list>
@@ -651,8 +485,8 @@ const { xs } = useDisplay()
       <v-card class="bg-dark-4 rounded-xl" elevation="10">
         <v-card-text class="pa-6">
           <p class="text-light-2 mb-6">
-            Following this €300,000 pre-seed investment, we project a Series A
-            round of €2-3M within 12 months based on achieving key metrics:
+            Following this €500,000 pre-seed investment, we project a Series A
+            round of €3-5M within 12 months based on achieving key metrics:
           </p>
 
           <v-row>
@@ -753,9 +587,71 @@ const { xs } = useDisplay()
       </v-card>
     </section>
   </v-container>
+
+  <v-dialog v-model="showPartyXVisionDialog" max-width="750px" scrollable>
+    <v-card class="bg-dark-5">
+      <v-card-text>
+        <div class="pa-3 text-caption d-flex flex-column ga-2 text-light-2">
+          <span class="font-weight-bold text-blue-lighten-3"
+            >Market Context:</span
+          >
+          <span
+            >Derived from the substantial Recreation & Culture market across key
+            regions (EU, USA, Korea, Japan), estimated at ~€626 billion annually
+            (based on 2020 household spending data).</span
+          >
+
+          <span class="font-weight-bold text-blue-lighten-3"
+            >Baseline Potential (80B+):</span
+          >
+          <span
+            >Represents projected annual revenue capture within the
+            current/near-term market structure.</span
+          >
+
+          <span class="font-weight-bold text-blue-lighten-3"
+            >Future Potential (Up to 200B+ - AI-Impact Scenario):</span
+          >
+          <span>
+            <span class="font-weight-medium">Why the jump?</span>
+            This higher projection (€200B+) anticipates significant future
+            economic and societal shifts primarily driven by
+            <span class="font-weight-medium">widespread AI adoption</span>. Key
+            contributing factors under this scenario include:
+          </span>
+          <ul class="pl-4">
+            <li>
+              <span class="font-weight-medium"
+                >AI-Driven Economic Changes:</span
+              >
+              Potential government responses ('General Income'/UBI) to mitigate
+              AI's impact on employment, potentially stabilizing or increasing
+              consumer spending power.
+            </li>
+            <li>
+              <span class="font-weight-medium"
+                >Increased Disposable Income:</span
+              >
+              AI-driven efficiencies leading to cost reductions in essential
+              goods/services, freeing up funds for experiences.
+            </li>
+            <li>
+              <span class="font-weight-medium">Evolving Social Needs:</span>
+              A potential increase in demand for authentic human connection and
+              shared experiences as society adapts to AI's prevalence.
+            </li>
+          </ul>
+          <span
+            >Achieving this €200B+ potential hinges on navigating these complex,
+            AI-influenced future transitions successfully.</span
+          >
+        </div>
+      </v-card-text>
+    </v-card>
+  </v-dialog>
 </template>
 
-<style>
+<style scoped>
 /* global background color */
 body {
   background-color: #1c1c1e;
@@ -828,7 +724,6 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-fill-color: transparent;
 }
 
 /* Custom Styles */
